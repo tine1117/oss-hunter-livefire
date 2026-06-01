@@ -4,15 +4,17 @@ from __future__ import annotations
 
 import re
 
-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
+# Seconds per unit. Supported: weeks, days, hours, minutes, seconds.
 _UNITS = {
     "w": 604800,
+    "d": 86400,
     "h": 3600,
     "m": 60,
     "s": 1,
 }
 
-_TOKEN = re.compile(r"(\d+)([wdhms])")
+_UNIT_CHARS = "".join(re.escape(unit) for unit in _UNITS)
+_TOKEN = re.compile(rf"(\d+)([{_UNIT_CHARS}])")
 
 
 def parse_duration(text: str) -> int:

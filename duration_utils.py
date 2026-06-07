@@ -43,3 +43,9 @@ def parse_duration(text: str) -> int:
         value, unit = int(m.group(1)), m.group(2)
         if unit in _UNITS:
             total += value * _UNITS[unit]
+        consumed += len(m.group(0))
+
+    if consumed != len(text):
+        raise ValueError(f"invalid duration: {text!r}")
+
+    return total

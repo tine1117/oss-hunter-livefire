@@ -8,6 +8,7 @@ A tiny, dependency-free parser for human-friendly duration strings.
 from duration_utils import parse_duration
 
 parse_duration("1h30m")   # 5400
+parse_duration("2d4h")    # 187200
 parse_duration("1w")      # 604800
 ```
 

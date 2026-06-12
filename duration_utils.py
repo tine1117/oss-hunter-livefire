@@ -13,7 +13,7 @@ _UNITS = {
     "s": 1,
 }
 
-_TOKEN = re.compile(r"(\d+)([wdhms])")
+_TOKEN = re.compile(r"(\d+)([a-z]+)")
 
 
 def parse_duration(text: str) -> int:
@@ -34,8 +34,9 @@ def parse_duration(text: str) -> int:
     consumed = 0
     for m in _TOKEN.finditer(text):
         value, unit = int(m.group(1)), m.group(2)
-        if unit in _UNITS:
-            total += value * _UNITS[unit]
+        if unit not in _UNITS:
+            raise ValueError(f"unsupported duration unit: {unit!r}")
+        total += value * _UNITS[unit]
         consumed += len(m.group(0))
 
     if consumed != len(text):

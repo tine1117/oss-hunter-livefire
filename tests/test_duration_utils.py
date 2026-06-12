@@ -32,6 +32,10 @@ class ParseDuration(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_duration("abc")
 
+    def test_unsupported_unit_raises(self):
+        with self.assertRaisesRegex(ValueError, "unsupported duration unit"):
+            parse_duration("1x")
+
     def test_empty_raises(self):
         with self.assertRaises(ValueError):
             parse_duration("")

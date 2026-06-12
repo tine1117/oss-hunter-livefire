@@ -9,6 +9,7 @@ from duration_utils import parse_duration
 
 parse_duration("1h30m")   # 5400
 parse_duration("1w")      # 604800
+parse_duration("1d")      # 86400
 ```
 
 Supported units: `w` (weeks), `d` (days), `h` (hours), `m` (minutes), `s` (seconds).

@@ -30,3 +30,12 @@ class ParseDuration(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+def test_days_unit():
+    assert parse_duration("1d") == 86400
+
+def test_days_combined():
+    assert parse_duration("2d4h") == 187200
+
+def test_days_with_minutes():
+    assert parse_duration("1d30m") == 88200

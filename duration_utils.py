@@ -1,41 +1,41 @@
-"""Parse human-friendly duration strings like '1h30m' into seconds."""
-
-from __future__ import annotations
-
 import re
 
-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
 _UNITS = {
-    "w": 604800,
-    "h": 3600,
-    "m": 60,
-    "s": 1,
+    'w': 604800,
+    'd': 86400,
+    'h': 3600,
+    'm': 60,
+    's': 1,
 }
 
-_TOKEN = re.compile(r"(\d+)([wdhms])")
+_TOKEN_RE = re.compile(r'(\d+)([wdhms])')
 
 
-def parse_duration(text: str) -> int:
-    """Return the total number of seconds in a duration string.
+def parse_duration(s: str) -> int:
+    """Parse a human-friendly duration string and return total seconds.
 
-    Examples:
-        parse_duration("1h30m") -> 5400
-        parse_duration("1w")    -> 604800
+    Supported units: w (weeks), d (days), h (hours), m (minutes), s (seconds).
 
-    Raises ValueError on empty or malformed input.
+    Examples::
+
+        parse_duration("1h30m")  # 5400
+        parse_duration("1d")     # 86400
+        parse_duration("2d4h")   # 187200
     """
-    text = text.strip().lower()
-    if not text:
-        raise ValueError("empty duration")
+    if not s:
+        raise ValueError("Empty duration string")
 
     total = 0
-    consumed = 0
-    for m in _TOKEN.finditer(text):
-        value, unit = int(m.group(1)), m.group(2)
-        if unit in _UNITS:
-            total += value * _UNITS[unit]
-        consumed += len(m.group(0))
+    pos = 0
+    for match in _TOKEN_RE.finditer(s):
+        if match.start() != pos:
+            raise ValueError(f"Unrecognised token at position {pos} in {s!r}")
+        value = int(match.group(1))
+        unit = match.group(2)
+        total += value * _UNITS[unit]
+        pos = match.end()
 
-    if consumed != len(text):
-        raise ValueError(f"invalid duration: {text!r}")
+    if pos != len(s):
+        raise ValueError(f"Unrecognised token at position {pos} in {s!r}")
+
     return total

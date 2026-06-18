@@ -1,0 +1,13 @@
+{
+  "owner": "tine1117",
+  "repo": "oss-hunter-livefire",
+  "issueNumber": "1",
+  "title": "parse_duration drops the days (d) unit",
+  "body": "## Bug\n\n`parse_duration` silently drops the **days** (`d`) unit. The README lists `d` as a\nsupported unit, but the parser ignores it and returns a wrong (too-small) result\ninstead of raising or counting it.\n\n### Reproduction\n\n```python\nfrom duration_utils import parse_duration\n\nparse_duration(\"1d\")     # -> 0        (expected 86400)\nparse_duration(\"2d4h\")   # -> 14400    (expected 187200)\n```\n\n### Expected\n\n`d` should be counted as 86400 seconds, so `parse_duration(\"1d\") == 86400` and\n`parse_duration(\"2d4h\") == 187200`.\n\n### Notes\n\nThe `d` character is already accepted by the token regex, so malformed-input\ndetection still passes — the value is just never added. A fix should add the\n`d` unit and cover it with tests.\n\n/bounty $50\n",
+  "labels": [
+    "💎 Bounty",
+    "$50"
+  ],
+  "gitCloneUrl": "https://github.com/tine1117/oss-hunter-livefire.git",
+  "repoDir": "/Users/macminim1/Documents/efe/bounty-hunter/temp/oss-hunter-livefire"
+}

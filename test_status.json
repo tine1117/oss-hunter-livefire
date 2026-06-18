@@ -1,0 +1,4 @@
+{
+  "passed": false,
+  "error": "/bin/sh: pytest: command not found\n/bin/sh: python: command not found\n"
+}

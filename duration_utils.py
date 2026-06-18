@@ -4,15 +4,16 @@ from __future__ import annotations
 
 import re
 
-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
+# Seconds per unit. Supported: weeks, days, hours, minutes, seconds.
 _UNITS = {
     "w": 604800,
+    "d": 86400,
     "h": 3600,
     "m": 60,
     "s": 1,
 }
 
-_TOKEN = re.compile(r"(\d+)([wdhms])")
+_TOKEN = re.compile(r"(\d+)([a-z]+)")
 
 
 def parse_duration(text: str) -> int:
@@ -20,6 +21,7 @@ def parse_duration(text: str) -> int:
 
     Examples:
         parse_duration("1h30m") -> 5400
+        parse_duration("2d4h")  -> 187200
         parse_duration("1w")    -> 604800
 
     Raises ValueError on empty or malformed input.
@@ -32,8 +34,9 @@ def parse_duration(text: str) -> int:
     consumed = 0
     for m in _TOKEN.finditer(text):
         value, unit = int(m.group(1)), m.group(2)
-        if unit in _UNITS:
-            total += value * _UNITS[unit]
+        if unit not in _UNITS:
+            raise ValueError(f"unsupported duration unit: {unit!r}")
+        total += value * _UNITS[unit]
         consumed += len(m.group(0))
 
     if consumed != len(text):

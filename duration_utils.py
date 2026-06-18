@@ -10,10 +10,10 @@ _UNITS = {
     "h": 3600,
     "m": 60,
     "s": 1,
+    "d": 86400,
 }
 
 _TOKEN = re.compile(r"(\d+)([wdhms])")
-
 
 def parse_duration(text: str) -> int:
     """Return the total number of seconds in a duration string.

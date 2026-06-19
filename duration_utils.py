@@ -10,6 +10,7 @@ _UNITS = {
     "h": 3600,
     "m": 60,
     "s": 1,
+    "d": 86400,
 }
 
 _TOKEN = re.compile(r"(\d+)([wdhms])")

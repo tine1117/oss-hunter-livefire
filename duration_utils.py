@@ -6,13 +6,14 @@ import re
 
 # Seconds per unit. Supported: weeks, hours, minutes, seconds.
 _UNITS = {
+    "d": 86400,
     "w": 604800,
     "h": 3600,
     "m": 60,
     "s": 1,
 }
 
-_TOKEN = re.compile(r"(\d+)([wdhms])")
+_TOKEN = re.compile(r"(\d+)([wdhmsd])")
 
 
 def parse_duration(text: str) -> int:

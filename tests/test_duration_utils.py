@@ -4,6 +4,12 @@ from duration_utils import parse_duration
 
 
 class ParseDuration(unittest.TestCase):
+    def test_days(self):
+        self.assertEqual(parse_duration("1d"), 86400)
+
+    def test_days_and_hours(self):
+        self.assertEqual(parse_duration("2d4h"), 187200)
+
     def test_hours(self):
         self.assertEqual(parse_duration("1h"), 3600)
 

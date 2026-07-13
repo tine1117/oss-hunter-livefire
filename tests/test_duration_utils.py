@@ -18,6 +18,10 @@ class ParseDuration(unittest.TestCase):
 
     def test_combined(self):
         self.assertEqual(parse_duration("1h30m"), 5400)
+        self.assertEqual(parse_duration("2d4h"), 187200)
+
+    def test_days(self):
+        self.assertEqual(parse_duration("1d"), 86400)
 
     def test_invalid_raises(self):
         with self.assertRaises(ValueError):

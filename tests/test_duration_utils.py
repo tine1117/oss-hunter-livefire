@@ -27,6 +27,11 @@ class ParseDuration(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_duration("")
 
+    def test_days(self):
+        self.assertEqual(parse_duration("1d"), 86400)
+
+    def test_days_and_hours(self):
+        self.assertEqual(parse_duration("2d4h"), 187200)
 
 if __name__ == "__main__":
     unittest.main()

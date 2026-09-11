@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import re
 
-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
+# Seconds per unit. Supported: days, weeks, hours, minutes, seconds.
 _UNITS = {
+    "d": 86400,
     "w": 604800,
     "h": 3600,
     "m": 60,

@@ -1,0 +1,14 @@
+test_combined (test_duration_utils.ParseDuration.test_combined) ... ok
+test_days (test_duration_utils.ParseDuration.test_days) ... ok
+test_days_and_hours (test_duration_utils.ParseDuration.test_days_and_hours) ... ok
+test_empty_raises (test_duration_utils.ParseDuration.test_empty_raises) ... ok
+test_hours (test_duration_utils.ParseDuration.test_hours) ... ok
+test_invalid_raises (test_duration_utils.ParseDuration.test_invalid_raises) ... ok
+test_minutes (test_duration_utils.ParseDuration.test_minutes) ... ok
+test_seconds (test_duration_utils.ParseDuration.test_seconds) ... ok
+test_weeks (test_duration_utils.ParseDuration.test_weeks) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.001s
+
+OK

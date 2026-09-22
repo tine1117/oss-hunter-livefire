@@ -1,0 +1,33 @@
+diff --git a/duration_utils.py b/duration_utils.py
+index ee515c6..911a278 100644
+--- a/duration_utils.py
++++ b/duration_utils.py
+@@ -4,9 +4,10 @@ from __future__ import annotations
+ 
+ import re
+ 
+-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
++# Seconds per unit. Supported: weeks, days, hours, minutes, seconds.
+ _UNITS = {
+     "w": 604800,
++    "d": 86400,
+     "h": 3600,
+     "m": 60,
+     "s": 1,
+diff --git a/tests/test_duration_utils.py b/tests/test_duration_utils.py
+index b259480..1103ed3 100644
+--- a/tests/test_duration_utils.py
++++ b/tests/test_duration_utils.py
+@@ -16,6 +16,12 @@ class ParseDuration(unittest.TestCase):
+     def test_weeks(self):
+         self.assertEqual(parse_duration("1w"), 604800)
+ 
++    def test_days(self):
++        self.assertEqual(parse_duration("1d"), 86400)
++
++    def test_days_and_hours(self):
++        self.assertEqual(parse_duration("2d4h"), 187200)
++
+     def test_combined(self):
+         self.assertEqual(parse_duration("1h30m"), 5400)
+ 

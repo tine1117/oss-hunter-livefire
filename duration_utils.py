@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import re
 
-# Seconds per unit. Supported: weeks, hours, minutes, seconds.
+# Seconds per unit. Supported: weeks, days, hours, minutes, seconds.
 _UNITS = {
     "w": 604800,
+    "d": 86400,
     "h": 3600,
     "m": 60,
     "s": 1,
@@ -20,6 +21,7 @@ def parse_duration(text: str) -> int:
 
     Examples:
         parse_duration("1h30m") -> 5400
+        parse_duration("1d")    -> 86400
         parse_duration("1w")    -> 604800
 
     Raises ValueError on empty or malformed input.
